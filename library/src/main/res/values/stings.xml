@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Apk升级提示窗口-->
+    <string name="apkupgrade_last">It is the latest version</string>
+    <string name="apkupgrade_title">New version alert</string>
+    <string name="apkupgrade_vname">version：</string>
+    <string name="apkupgrade_detail">description：</string>
+    <string name="apkupgrade_time">time：</string>
+    <string name="apkupgrade_able">There is a new version of the current app. Do you want to update it? \r\n</string>
+    <string name="apkupgrade_force">The current application has important updates, if not upgraded, it will affect the user experience \r\n</string>
+    <string name="apkupgrade_able_esc">Ignore</string>
+    <string name="apkupgrade_force_esc">ExitApp</string>
+    <string name="apkupgrade_ent">Update</string>
+
+    <!--Apk下载部分-->
+    <string name="apkdownload_hint">Downloading, please wait</string>
+    <string name="apkdownload_fail">Download failed</string>
+    <string name="apkdownload_esc">Cancel</string>
+</resources>

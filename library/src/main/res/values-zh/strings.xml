@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Apk升级提示窗口-->
+    <string name="apkupgrade_last">已经是最新版本</string>
+    <string name="apkupgrade_title">新版本提醒</string>
+    <string name="apkupgrade_vname">应用版本：</string>
+    <string name="apkupgrade_detail">更新描述：</string>
+    <string name="apkupgrade_time">发布时间：</string>
+    <string name="apkupgrade_able">当前应用有新版本，是否需要更新？ \r\n</string>
+    <string name="apkupgrade_force">当前应用有重要更新，如不升级将影响用户体验 \r\n</string>
+    <string name="apkupgrade_able_esc">忽略</string>
+    <string name="apkupgrade_force_esc">退出应用</string>
+    <string name="apkupgrade_ent">更新</string>
+
+    <!--Apk下载部分-->
+    <string name="apkdownload_hint">正在下载安装包，请稍后</string>
+    <string name="apkdownload_fail">下载失败</string>
+    <string name="apkdownload_esc">取消</string>
+</resources>

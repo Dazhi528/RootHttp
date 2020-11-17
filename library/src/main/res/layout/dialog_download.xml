@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/dialog_download_padding"
+    android:background="@drawable/shape_dialog_download">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/apkdownload_hint"
+        android:textColor="@color/dialog_download_textdark"
+        android:textSize="16sp"/>
+
+    <ProgressBar
+        android:id="@+id/pbDownloadProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dialog_download_mtopbig"
+        style="?android:attr/progressBarStyleHorizontal"/>
+
+    <TextView
+        android:id="@+id/tvDownloadPercent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dialog_download_mtopsmall"
+        android:gravity="center_vertical|right"
+        android:textColor="@color/dialog_download_textdark"
+        android:textSize="14sp"
+        android:text="0.23/8.01 M" />
+
+    <Button
+        android:id="@+id/btDownloadEsc"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dialog_download_mtopsmall"
+        android:gravity="bottom|right"
+        android:textColor="@color/dialog_download_bttext"
+        android:textSize="14sp"
+        android:text="@string/apkdownload_esc"
+        android:background="@null"/>
+</LinearLayout>
