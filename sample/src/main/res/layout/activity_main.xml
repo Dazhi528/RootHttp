@@ -12,5 +12,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="进入扫码页面" />
+        android:text="测试按钮" />
 </RelativeLayout>

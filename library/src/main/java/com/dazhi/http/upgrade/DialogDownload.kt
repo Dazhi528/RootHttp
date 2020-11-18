@@ -15,13 +15,8 @@ import kotlinx.android.synthetic.main.dialog_download.*
  * 邮箱：wangzezhi528@163.com
  * 日期：20-9-14 上午10:30
  */
-class DialogDownload(context: Context?, private val intProgress: Int, private val intApkSize: Int,
-                     private val mCancelCallback: CancelCallback?) : AppCompatDialog(context) {
-    // 中途停止下载时回调
-    interface CancelCallback {
-        fun handle()
-    }
-
+class DialogDownload(context: Context?, private val intProgress: Long=0, private val intApkSize: Long=0,
+                     private val mCancelCallback: (() -> Unit)? = null) : AppCompatDialog(context) {
     init {
         setCancelable(false)
         setCanceledOnTouchOutside(false)
@@ -48,26 +43,27 @@ class DialogDownload(context: Context?, private val intProgress: Int, private va
             btDownloadEsc.visibility = View.VISIBLE
             btDownloadEsc.setOnClickListener {
                 dismiss()
-                mCancelCallback.handle()
+                mCancelCallback.invoke()
             }
         }
     }
 
     @SuppressLint("DefaultLocale")
-    private fun getPercent(intProgress: Int, intApkSize: Int): String {
+    private fun getPercent(intProgress: Long, intApkSize: Long): String {
         if (intProgress < 0 || intApkSize < 0) {
+            pbDownloadProgress!!.progress = 0
+            pbDownloadProgress!!.max = 0
             return "0/0 M"
         }
         //byte to MB
         val douProgress = intProgress.toDouble() / (1024 * 1024)
         val douMaxSize = intApkSize.toDouble() / (1024 * 1024)
+        pbDownloadProgress!!.progress = douProgress.toInt()
+        pbDownloadProgress!!.max = douMaxSize.toInt()
         return String.format("%.2f/%.2f M", douProgress, douMaxSize)
     }
 
-    fun updateData(intProgress: Int, intApkSize: Int) {
-        pbDownloadProgress!!.progress = intProgress
-        pbDownloadProgress!!.max = intApkSize
-        //
+    fun updateData(intProgress: Long, intApkSize: Long) {
         tvDownloadPercent!!.text = getPercent(intProgress, intApkSize)
     }
 

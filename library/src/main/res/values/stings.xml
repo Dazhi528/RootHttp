@@ -6,8 +6,8 @@
     <string name="apkupgrade_vname">version：</string>
     <string name="apkupgrade_detail">description：</string>
     <string name="apkupgrade_time">time：</string>
-    <string name="apkupgrade_able">There is a new version of the current app. Do you want to update it? \r\n</string>
-    <string name="apkupgrade_force">The current application has important updates, if not upgraded, it will affect the user experience \r\n</string>
+    <string name="apkupgrade_able">There is a new version of the current app. Do you want to update it? \n</string>
+    <string name="apkupgrade_force">The current application has important updates, if not upgraded, it will affect the user experience \n</string>
     <string name="apkupgrade_able_esc">Ignore</string>
     <string name="apkupgrade_force_esc">ExitApp</string>
     <string name="apkupgrade_ent">Update</string>

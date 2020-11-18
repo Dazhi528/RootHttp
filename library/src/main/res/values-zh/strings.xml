@@ -6,8 +6,8 @@
     <string name="apkupgrade_vname">应用版本：</string>
     <string name="apkupgrade_detail">更新描述：</string>
     <string name="apkupgrade_time">发布时间：</string>
-    <string name="apkupgrade_able">当前应用有新版本，是否需要更新？ \r\n</string>
-    <string name="apkupgrade_force">当前应用有重要更新，如不升级将影响用户体验 \r\n</string>
+    <string name="apkupgrade_able">当前应用有新版本，是否需要更新？ \n</string>
+    <string name="apkupgrade_force">当前应用有重要更新，如不升级将影响用户体验 \n</string>
     <string name="apkupgrade_able_esc">忽略</string>
     <string name="apkupgrade_force_esc">退出应用</string>
     <string name="apkupgrade_ent">更新</string>

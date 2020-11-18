@@ -14,10 +14,10 @@ import retrofit2.http.*
  * 日期：20-9-14 上午9:05
  */
 interface IApkUpgrade {
+    //  @Headers("range: bytes={loadedLen}-") // mapOf("RANGE" to "bytes=${dnLen}-")
     @GET
     @Streaming
-    @Headers("range: bytes={loadedLen}-") // mapOf("RANGE" to "bytes=${dnLen}-")
-    fun download(@Url url: String, @Path("loadedLen")loadedLen: Long): Flow<Response<ResponseBody>>
+    fun download(@Url url: String, @Header("range: bytes={loadedLen}-")loadedLen: Long): Flow<Response<ResponseBody>>
 }
 
 /**

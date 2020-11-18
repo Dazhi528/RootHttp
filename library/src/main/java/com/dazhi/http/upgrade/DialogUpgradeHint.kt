@@ -12,9 +12,9 @@ import com.dazhi.http.R
  * 邮箱：wangzezhi528@163.com
  * 日期：20-9-14 上午9:50
  */
-class DialogUpgradeHint(context:Context, boForce: Boolean, describe: String,
-        onClickEnt:DialogInterface.OnClickListener,
-        onClickEsc:DialogInterface.OnClickListener) {
+class DialogUpgradeHint(context:Context, boForce: Boolean, describe: String = "",
+                        onClickEsc:DialogInterface.OnClickListener? = null,
+                        onClickEnt:DialogInterface.OnClickListener = DialogInterface.OnClickListener { _, _ -> }) {
     private val alertDialog: AlertDialog
 
     init {

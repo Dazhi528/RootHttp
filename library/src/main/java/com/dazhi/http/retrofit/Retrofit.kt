@@ -23,7 +23,7 @@ val okHttpClient: OkHttpClient = OkHttpClient().newBuilder()
 val flowCallAdapterFactory = FlowCallAdapterFactory()
 
 inline fun <reified T> createApi(
-        baseUrl: String="",
+        baseUrl: String = "http://127.0.0.1/",
         client: OkHttpClient = okHttpClient,
         callAdapterFactory: CallAdapter.Factory = flowCallAdapterFactory,
         converterFactory: Converter.Factory? = StringConverterFactory.own()
