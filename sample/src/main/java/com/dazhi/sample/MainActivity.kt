@@ -2,9 +2,7 @@ package com.dazhi.sample
 
 import android.os.Environment
 import android.widget.TextView
-import com.dazhi.http.temp.DownloadListener
 import com.dazhi.http.upgrade.DialogDownload
-import com.dazhi.http.upgrade.DialogDownloadTask
 import com.dazhi.libroot.root.RootSimpActivity
 import com.dazhi.libroot.util.RtCmn
 import com.dazhi.libroot.util.RtLog
@@ -21,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : RootSimpActivity() {
 
     override val layoutId: Int
-        protected get() = R.layout.activity_main
+        get() = R.layout.activity_main
 
     override fun initConfig(tvToolTitle: TextView?) {
         tvToolTitle!!.text = "视图库"
@@ -29,38 +27,19 @@ class MainActivity : RootSimpActivity() {
     }
 
     override fun initViewAndDataAndEvent() {
+        val url = "http://intelink.onecod.com:8800/File/Tpe/TpeApp-3-1.0.3R.apk"
         val downloadDir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.absolutePath
         if (downloadDir == null || downloadDir.isEmpty()) {
             RtCmn.toastShort("存储目录路径获取失败")
             return
         }
-        val mDialogDownloadTask = DialogDownloadTask(object : DownloadListener {
-            override fun onProgress(progress: Int) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onSuccess() {
-                TODO("Not yet implemented")
-            }
-
-            override fun onFailed() {
-                TODO("Not yet implemented")
-            }
-
-            override fun onPaused() {
-                TODO("Not yet implemented")
-            }
-
-            override fun onCanceled() {
-                TODO("Not yet implemented")
-            }
-        })
-        val mDialogDownload = DialogDownload(this)
+        // ===== 按钮点击监听
         viewClick(btTest) {
-            mDialogDownload.show()
-            mDialogDownloadTask.execute(false,
-                    "http://intelink.onecod.com:8800/File/Tpe/TpeApp-3-1.0.3R.apk",
-                    downloadDir)
+            DialogDownload(this, true,
+                    url, downloadDir) {
+                RtCmn.toastShort(if (it) "下载成功" else "下载失败")
+            }.show()
         }
     }
+
 }

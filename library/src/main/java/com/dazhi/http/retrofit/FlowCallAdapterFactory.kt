@@ -48,11 +48,11 @@ private class FlowCallAdapter<R>(private val responseType: Type) : CallAdapter<R
                     override fun onResponse(call: Call<R>, response: Response<R>) {
                         if (response.isSuccessful) {
                             val body = response.body()
-                            if (body == null || response.code() != 200) {
+                            // 206是文件下载时，回待下载文件的总长度用
+                            if (body == null || (response.code()!=206 && response.code() != 200)) {
                                 close(Throwable("HTTP status code: ${response.code()}"))
                             } else {
                                 offer(body)
-                                close()
                             }
                         } else {
                             close(Throwable(errorMsg(response) ?: "unknown error"))
@@ -64,7 +64,10 @@ private class FlowCallAdapter<R>(private val responseType: Type) : CallAdapter<R
                     }
                 })
             }
-            awaitClose { call.cancel() }
+            awaitClose {
+                close()
+                call.cancel()
+            }
         }
     }
 

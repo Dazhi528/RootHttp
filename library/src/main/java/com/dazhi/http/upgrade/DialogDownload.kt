@@ -15,12 +15,27 @@ import kotlinx.android.synthetic.main.dialog_download.*
  * 邮箱：wangzezhi528@163.com
  * 日期：20-9-14 上午10:30
  */
-class DialogDownload(context: Context?, private val intProgress: Long=0, private val intApkSize: Long=0,
-                     private val mCancelCallback: (() -> Unit)? = null) : AppCompatDialog(context) {
+class DialogDownload(context: Context?, private val boReLoad: Boolean,
+                     private val url: String, private val saveDir: String,
+                     private val callback: (boOk: Boolean) -> Unit) : AppCompatDialog(context) {
     init {
         setCancelable(false)
         setCanceledOnTouchOutside(false)
     }
+
+    private val mDialogDownloadTask = DialogDownloadTask(object: DialogDownloadTask.Call {
+        override fun progress(progress: Long, fileSize: Long) {
+            updateData(progress, fileSize)
+        }
+        override fun succ() {
+            callback(true)
+            dismiss()
+        }
+        override fun fail() {
+            callback(false)
+            dismiss()
+        }
+    })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,42 +44,42 @@ class DialogDownload(context: Context?, private val intProgress: Long=0, private
         initView()
     }
 
+    override fun show() {
+        super.show()
+        mDialogDownloadTask.execute(boReLoad, url, saveDir)
+    }
 
     //字节数(byte);   当前下载字节数;  apk总字节数
     @SuppressLint("CheckResult")
     private fun initView() {
         if (tvDownloadPercent != null) {
-            tvDownloadPercent!!.text = getPercent(intProgress, intApkSize)
+            tvDownloadPercent!!.text = getPercent(0, 0)
         }
         // 关闭按钮
-        if(mCancelCallback==null) {
-            btDownloadEsc.visibility = View.GONE
-        }else {
-            btDownloadEsc.visibility = View.VISIBLE
-            btDownloadEsc.setOnClickListener {
-                dismiss()
-                mCancelCallback.invoke()
-            }
+        btDownloadEsc.setOnClickListener {
+            dismiss()
+            mDialogDownloadTask.cancel()
+            callback(false)
         }
     }
 
     @SuppressLint("DefaultLocale")
-    private fun getPercent(intProgress: Long, intApkSize: Long): String {
-        if (intProgress < 0 || intApkSize < 0) {
+    private fun getPercent(progress: Long, fileSize: Long): String {
+        if (progress < 0 || fileSize <= 0) {
             pbDownloadProgress!!.progress = 0
             pbDownloadProgress!!.max = 0
             return "0/0 M"
         }
         //byte to MB
-        val douProgress = intProgress.toDouble() / (1024 * 1024)
-        val douMaxSize = intApkSize.toDouble() / (1024 * 1024)
-        pbDownloadProgress!!.progress = douProgress.toInt()
-        pbDownloadProgress!!.max = douMaxSize.toInt()
+        val douProgress = progress.toDouble() / (1024 * 1024)
+        val douMaxSize = fileSize.toDouble() / (1024 * 1024)
+        pbDownloadProgress!!.progress = (douProgress*100/douMaxSize).toInt()
+        pbDownloadProgress!!.max = 100
         return String.format("%.2f/%.2f M", douProgress, douMaxSize)
     }
 
-    fun updateData(intProgress: Long, intApkSize: Long) {
-        tvDownloadPercent!!.text = getPercent(intProgress, intApkSize)
+    private fun updateData(progress: Long, fileSize: Long) {
+        tvDownloadPercent!!.text = getPercent(progress, fileSize)
     }
 
 }

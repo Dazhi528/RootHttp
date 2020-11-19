@@ -3,7 +3,6 @@ package com.dazhi.http.upgrade
 import com.dazhi.http.retrofit.createApi
 import kotlinx.coroutines.flow.Flow
 import okhttp3.ResponseBody
-import retrofit2.Response
 import retrofit2.http.*
 
 /**
@@ -14,16 +13,15 @@ import retrofit2.http.*
  * 日期：20-9-14 上午9:05
  */
 interface IApkUpgrade {
-    //  @Headers("range: bytes={loadedLen}-") // mapOf("RANGE" to "bytes=${dnLen}-")
     @GET
     @Streaming
-    fun download(@Url url: String, @Header("range: bytes={loadedLen}-")loadedLen: Long): Flow<Response<ResponseBody>>
+    fun download(@Url url: String, @Header("range")loadedLen: String): Flow<ResponseBody>
 }
 
 /**
  * 作者：WangZezhi  (20-11-17  下午3:15)
  * 功能：库请求构建实例
- * 描述：实际开发中尽量结合自己的业务逻辑请求去构建一个，因为createApi()函数最后项目中调用一次
+ * 描述：实际开发中尽量结合自己的业务逻辑请求去构建一个，因为createApi()函数最好仅在项目中调用一次
  */
 object IApkUpgradeImpl {
     private val api by lazy {
@@ -33,7 +31,8 @@ object IApkUpgradeImpl {
 
     // loadedLen 已下载的文件大小
     @JvmStatic
-    fun download(url: String, loadedLen: Long=0): Flow<Response<ResponseBody>> {
-        return api.download(url, loadedLen)
+    fun download(url: String, loadedLen: Long=0): Flow<ResponseBody> {
+        return api.download(url, "bytes=${loadedLen}-")
     }
+
 }

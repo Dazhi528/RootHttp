@@ -20,12 +20,10 @@ val okHttpClient: OkHttpClient = OkHttpClient().newBuilder()
         .writeTimeout(20, TimeUnit.SECONDS)
         .build()
 
-val flowCallAdapterFactory = FlowCallAdapterFactory()
-
 inline fun <reified T> createApi(
         baseUrl: String = "http://127.0.0.1/",
         client: OkHttpClient = okHttpClient,
-        callAdapterFactory: CallAdapter.Factory = flowCallAdapterFactory,
+        callAdapterFactory: CallAdapter.Factory = FlowCallAdapterFactory(),
         converterFactory: Converter.Factory? = StringConverterFactory.own()
 ): T {
     val retrofit = Retrofit.Builder()
