@@ -23,7 +23,7 @@ interface IApkUpgrade {
  * 功能：库请求构建实例
  * 描述：实际开发中尽量结合自己的业务逻辑请求去构建一个，因为createApi()函数最好仅在项目中调用一次
  */
-object IApkUpgradeImpl {
+internal object IApkUpgradeImpl {
     private val api by lazy {
         // 这里不使用默认的Sting转换工厂
         createApi<IApkUpgrade>(converterFactory = null)
