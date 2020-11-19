@@ -3,10 +3,11 @@ package com.dazhi.http.upgrade
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatDialog
 import com.dazhi.http.R
 import kotlinx.android.synthetic.main.dialog_download.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * 功能：下载Apk对话框
@@ -24,8 +25,10 @@ class DialogDownload(context: Context?, private val boReLoad: Boolean,
     }
 
     private val mDialogDownloadTask = DialogDownloadTask(object: DialogDownloadTask.Call {
-        override fun progress(progress: Long, fileSize: Long) {
-            updateData(progress, fileSize)
+        override suspend fun progress(progress: Long, fileSize: Long) {
+            withContext(Dispatchers.Main) {
+                updateData(progress, fileSize)
+            }
         }
         override fun succ() {
             callback(true)
@@ -52,9 +55,6 @@ class DialogDownload(context: Context?, private val boReLoad: Boolean,
     //字节数(byte);   当前下载字节数;  apk总字节数
     @SuppressLint("CheckResult")
     private fun initView() {
-        if (tvDownloadPercent != null) {
-            tvDownloadPercent!!.text = getPercent(0, 0)
-        }
         // 关闭按钮
         btDownloadEsc.setOnClickListener {
             dismiss()
@@ -63,7 +63,6 @@ class DialogDownload(context: Context?, private val boReLoad: Boolean,
         }
     }
 
-    @SuppressLint("DefaultLocale")
     private fun getPercent(progress: Long, fileSize: Long): String {
         if (progress < 0 || fileSize <= 0) {
             pbDownloadProgress!!.progress = 0
@@ -73,7 +72,7 @@ class DialogDownload(context: Context?, private val boReLoad: Boolean,
         //byte to MB
         val douProgress = progress.toDouble() / (1024 * 1024)
         val douMaxSize = fileSize.toDouble() / (1024 * 1024)
-        pbDownloadProgress!!.progress = (douProgress*100/douMaxSize).toInt()
+        pbDownloadProgress!!.progress = (progress*100/fileSize).toInt()
         pbDownloadProgress!!.max = 100
         return String.format("%.2f/%.2f M", douProgress, douMaxSize)
     }

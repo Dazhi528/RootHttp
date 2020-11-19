@@ -2,7 +2,8 @@
 <resources>
     <!--应用下载对话框-->
     <dimen name="dialog_download_radius">2dp</dimen>
-    <dimen name="dialog_download_padding">20dp</dimen>
+    <dimen name="dialog_download_paddingx">20dp</dimen>
+    <dimen name="dialog_download_paddingy">10dp</dimen>
     <dimen name="dialog_download_mtopbig">25dp</dimen>
     <dimen name="dialog_download_mtopsmall">5dp</dimen>
 </resources>

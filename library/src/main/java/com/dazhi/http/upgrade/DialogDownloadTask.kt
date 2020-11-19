@@ -28,7 +28,7 @@ internal class DialogDownloadTask(val call: Call) {
     }
 
     interface Call {
-        fun progress(progress: Long, fileSize: Long)
+        suspend fun progress(progress: Long, fileSize: Long)
         fun succ()
         fun fail()
     }
@@ -76,8 +76,13 @@ internal class DialogDownloadTask(val call: Call) {
                 dnLen = file.length()
             }
             // 判断下载进度
-            if (size == 0L || dnLen >= size) {
-                call.fail()
+            if (size <= 0L || dnLen >= size) {
+                if(size>0 && dnLen== size) {
+                    call.progress(dnLen, size)
+                    call.succ()
+                }else {
+                    call.fail()
+                }
                 return@launch
             }
             // 真正的下载逻辑
@@ -113,9 +118,7 @@ internal class DialogDownloadTask(val call: Call) {
                             }
                             mBufferedSink?.emit()
                             tempSum += tempLen
-                            withContext(Dispatchers.Main) {
-                                call.progress(tempSum+dnLen, size)
-                            }
+                            call.progress(tempSum+dnLen, size)
                         }
                         mSource?.close()
                         mBufferedSink?.close()

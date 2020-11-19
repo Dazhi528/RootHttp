@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<dimen name="dialog_download_radius">0.6667dp</dimen>
+	<dimen name="dialog_download_paddingx">6.6667dp</dimen>
+	<dimen name="dialog_download_paddingy">3.3333dp</dimen>
+	<dimen name="dialog_download_mtopbig">8.3333dp</dimen>
+	<dimen name="dialog_download_mtopsmall">1.6667dp</dimen>
+</resources>

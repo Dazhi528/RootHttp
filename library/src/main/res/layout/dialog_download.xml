@@ -3,7 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/dialog_download_padding"
+    android:paddingTop="@dimen/dialog_download_paddingy"
+    android:paddingBottom="@dimen/dialog_download_paddingy"
+    android:paddingLeft="@dimen/dialog_download_paddingx"
+    android:paddingRight="@dimen/dialog_download_paddingx"
     android:background="@drawable/shape_dialog_download">
 
     <TextView
@@ -28,13 +31,13 @@
         android:gravity="center_vertical|right"
         android:textColor="@color/dialog_download_textdark"
         android:textSize="14sp"
-        android:text="0.23/8.01 M" />
+        android:text="0/0 M" />
 
     <Button
         android:id="@+id/btDownloadEsc"
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="0dp"
         android:layout_marginTop="@dimen/dialog_download_mtopsmall"
         android:gravity="bottom|right"
         android:textColor="@color/dialog_download_bttext"
