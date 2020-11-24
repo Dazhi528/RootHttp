@@ -65,7 +65,6 @@ private class FlowCallAdapter<R>(private val responseType: Type) : CallAdapter<R
                 })
             }
             awaitClose {
-                close()
                 call.cancel()
             }
         }

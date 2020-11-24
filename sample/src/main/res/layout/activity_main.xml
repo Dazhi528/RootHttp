@@ -8,9 +8,18 @@
     <include layout="@layout/libroot_toolbar"/>
 
     <Button
-        android:id="@+id/btTest"
+        android:id="@+id/btTest1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="测试按钮" />
+        android:text="断点续传" />
+
+    <Button
+        android:id="@+id/btTest2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btTest1"
+        android:text="重新下载" />
 </RelativeLayout>

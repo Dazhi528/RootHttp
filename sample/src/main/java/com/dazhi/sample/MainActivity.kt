@@ -34,7 +34,13 @@ class MainActivity : RootSimpActivity() {
             return
         }
         // ===== 按钮点击监听
-        viewClick(btTest) {
+        viewClick(btTest1) {
+            DialogDownload(this, false,
+                    url, downloadDir) {
+                RtCmn.toastShort(if (it) "下载成功" else "下载失败")
+            }.show()
+        }
+        viewClick(btTest2) {
             DialogDownload(this, true,
                     url, downloadDir) {
                 RtCmn.toastShort(if (it) "下载成功" else "下载失败")
